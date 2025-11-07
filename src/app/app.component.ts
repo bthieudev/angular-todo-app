@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   // state
   isLoginForm = signal<boolean>(true);
   isModalOpen = signal<boolean>(false);
+  isUserLogged = signal<boolean>(false);
 
   // variables
   registerPayload: Signup = {
@@ -76,9 +77,11 @@ export class AppComponent implements OnInit {
       .subscribe(
         (res) => {
           localStorage.setItem('userInfo', JSON.stringify(res));
+          this.isUserLogged.set(true);
           this.userInfo = res;
           this.toggleModal();
           this.toastr.success('Login successfully');
+          this.isLoginForm.set(true);
         },
         (error) => {
           this.toastr.error(error.error);
@@ -88,6 +91,7 @@ export class AppComponent implements OnInit {
 
   handleLogout() {
     localStorage.removeItem('userInfo');
+    this.isUserLogged.set(false);
     this.userInfo = null;
     this.toastr.success('Log out successfully');
   }

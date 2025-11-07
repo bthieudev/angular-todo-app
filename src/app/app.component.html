@@ -17,12 +17,12 @@
         class="text-white opacity-80 hover:opacity-100 transition"
         >Home</a
       >
-      <a
+      <!-- <a
         routerLink="dashboard"
         routerLinkActive="opacity-100"
         class="text-white opacity-80 hover:opacity-100 transition"
         >Dashboard</a
-      >
+      > -->
       <a
         routerLink="tasks"
         routerLinkActive="opacity-100"
@@ -35,12 +35,12 @@
         class="text-white opacity-80 hover:opacity-100 transition"
         >Goals</a
       >
-      <a
+      <!-- <a
         routerLink="reminders"
         routerLinkActive="opacity-100 text-gray-800"
         class="text-white opacity-80 hover:opacity-100 transition"
         >Reminders</a
-      >
+      > -->
     </div>
 
     <!-- Right: Login button -->
@@ -67,9 +67,10 @@
     }
   </nav>
 
+  @if (isUserLogged()) {
   <router-outlet />
 
-  @if (isModalOpen()) {
+  } @if (isModalOpen()) {
   <div
     class="none fixed inset-0 bg-white/5 backdrop-blur-md flex items-center justify-center z-50"
   >
