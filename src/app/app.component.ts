@@ -3,7 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Signup, Login, IUserInfo } from './pages/models/User';
+import { Signup, Login, IUserInfo } from './models/User';
 
 @Component({
   selector: 'app-root',

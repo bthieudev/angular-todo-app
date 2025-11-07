@@ -1,1 +1,158 @@
-<p>new-goal works!</p>
+<section class="min-h-[70vh] bg-gray-50 py-10">
+  <div class="max-w-6xl mx-auto px-6">
+    <h1 class="text-3xl font-extrabold text-gray-800 mb-6">Create Goal</h1>
+
+    <!-- Card -->
+    <div
+      [formGroup]="goalForm"
+      class="relative bg-white rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,.06)] ring-1 ring-black/5 p-6 md:p-8"
+    >
+      <!-- Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Left column -->
+        <div>
+          <!-- Goal Title -->
+          <label class="block text-gray-800 font-semibold mb-2"
+            >Goal Title</label
+          >
+          <input
+            type="text"
+            placeholder="e.g. Learn Web Development"
+            class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            formControlName="goalName"
+          />
+
+          <!-- Dates -->
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="relative">
+              <label class="block text-gray-800 font-semibold mb-2"
+                >Start Date</label
+              >
+              <input
+                type="date"
+                placeholder="dd-mm-yyyy"
+                class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                formControlName="startDate"
+              />
+            </div>
+
+            <div class="relative">
+              <label class="block text-gray-800 font-semibold mb-2"
+                >End Date</label
+              >
+              <input
+                type="date"
+                placeholder="dd-mm-yyyy"
+                class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                formControlName="endDate"
+              />
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mt-6">
+            <label class="block text-gray-800 font-semibold mb-2"
+              >Description</label
+            >
+            <textarea
+              rows="4"
+              placeholder="Short summary of this goal..."
+              class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              formControlName="description"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Right column (Milestones) -->
+        <div formArrayName="milestones">
+          @for (item of milestoneList.controls; track $index) {
+          <ng-container [formGroupName]="$index">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
+              <div>
+                <label class="block text-gray-800 font-semibold mb-2"
+                  >Title</label
+                >
+                <input
+                  type="text"
+                  placeholder="e.g. HTML & CSS"
+                  class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  formControlName="milestoneName"
+                />
+              </div>
+
+              <div class="relative">
+                <label class="block text-gray-800 font-semibold mb-2"
+                  >Target Date</label
+                >
+                <input
+                  type="date"
+                  placeholder="dd-mm-yyyy"
+                  class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  formControlName="targetDate"
+                />
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block text-gray-800 font-semibold mb-2"
+                  >Description</label
+                >
+                <textarea
+                  formControlName="description"
+                  rows="4"
+                  placeholder="What does this milestone include?"
+                  class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                ></textarea>
+              </div>
+              @if ($index > 0) {
+              <div>
+                <button
+                  (click)="removeMilestone($index)"
+                  type="button"
+                  class="w-fit text-white rounded-xl border border-gray-200 bg-red-600 px-4 py-2.5 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                >
+                  Delete
+                </button>
+              </div>
+              }
+            </div>
+          </ng-container>
+          }
+        </div>
+      </div>
+
+      <!-- Floating Add button -->
+      <button
+        (click)="createNewMilestoneForm()"
+        type="button"
+        class="absolute right-6 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-11 w-11 rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-purple-600 hover:text-white transition shadow-sm"
+      >
+        <!-- plus icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v12m6-6H6"
+          />
+        </svg>
+      </button>
+
+      <!-- Footer actions -->
+      <div class="mt-8 flex justify-center">
+        <button
+          (click)="handleCreateNewGoal()"
+          type="button"
+          class="px-7 py-3 rounded-xl bg-purple-600 text-white font-semibold shadow-sm hover:bg-purple-700 transition"
+        >
+          Create Goal
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

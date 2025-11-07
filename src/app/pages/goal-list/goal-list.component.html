@@ -1,1 +1,89 @@
-<p>goal-list works!</p>
+<!-- Goals Page -->
+<section class="min-h-[70vh] w-full bg-gray-50">
+  <!-- Header -->
+  <div class="max-w-6xl mx-auto px-6 pt-10 flex items-center justify-between">
+    <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Goals</h1>
+
+    <!-- New Goal button -->
+    <button
+      type="button"
+      class="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-sm transition"
+      (click)="navigateToNewGoal()"
+    >
+      <!-- plus icon -->
+      <i class="fa-solid fa-plus"></i>
+      New Goal
+    </button>
+  </div>
+
+  <!-- Card -->
+  <div class="max-w-6xl mx-auto px-6 py-8 grid gap-4 grid-cols-2">
+    @for (item of goalList; track $index) {
+    <div
+      class="bg-white rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] p-6 md:p-7 max-w-xl"
+    >
+      <!-- Title -->
+      <h2 class="text-2xl md:text-3xl font-semibold text-gray-800">
+        {{ item.goalName }}
+      </h2>
+
+      <!-- Progress bar -->
+      <div class="mt-4">
+        <div class="h-3 w-full bg-gray-200 rounded-full overflow-hidden">
+          <!-- change width to your progress -->
+          <div
+            class="h-3 bg-purple-600 rounded-full relative"
+            style="width: 60%"
+          >
+            <span
+              class="absolute inset-0 flex items-center justify-center text-[11px] font-semibold text-white"
+              >60%</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestones -->
+      <div class="mt-6">
+        <!-- <p class="text-gray-700 font-medium mb-3">Milestones:</p> -->
+
+        <div class="rounded-2xl border border-gray-200 overflow-hidden">
+          <!-- item -->
+          <div class="flex items-center justify-between px-5 py-3 bg-white">
+            <span class="text-gray-800">Start Date</span>
+            <span
+              class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-600 text-white"
+            >
+              {{ item.startDate | date : "dd-MMM-yyyy" }}
+            </span>
+          </div>
+
+          <div class="h-px bg-gray-100"></div>
+
+          <!-- item -->
+          <div class="flex items-center justify-between px-5 py-3 bg-white">
+            <span class="text-gray-800">End Date</span>
+            <span
+              class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-400 text-white"
+            >
+              {{ item.endDate | date : "dd-MMM-yyyy" }}
+            </span>
+          </div>
+
+          <div class="h-px bg-gray-100"></div>
+
+          <!-- item -->
+          <div class="flex items-center justify-between px-5 py-3 bg-white">
+            <span class="text-gray-800">Description</span>
+            <span
+              class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-500 text-white"
+            >
+              {{ item.description }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</section>

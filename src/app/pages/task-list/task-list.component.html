@@ -1,1 +1,287 @@
-<p>task-list works!</p>
+<section class="bg-gray-50 min-h-[70vh] py-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <h1
+        class="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight"
+      >
+        Task Planner
+      </h1>
+
+      <button
+        (click)="openModal()"
+        class="inline-flex items-center gap-2 rounded-2xl bg-purple-600 px-5 py-2.5 text-white font-semibold shadow-sm hover:bg-purple-700 active:scale-[.98] transition"
+        type="button"
+      >
+        <!-- plus icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v12m6-6H6"
+          />
+        </svg>
+        New Task
+      </button>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <!-- Card: Daily -->
+      <article
+        class="rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,.06)] ring-1 ring-black/5 overflow-hidden"
+      >
+        <!-- header bar -->
+        <div
+          class="bg-gradient-to-r from-sky-600 to-sky-500 text-white px-6 py-3 font-extrabold text-lg rounded-t-3xl"
+        >
+          Daily Tasks
+        </div>
+
+        <!-- body -->
+        <div class="p-6">
+          <div
+            class="flex items-center justify-between rounded-2xl border border-gray-100 px-4 py-3"
+          >
+            <label class="flex items-center gap-3 text-gray-800">
+              <input type="checkbox" class="h-5 w-5 rounded accent-sky-500" />
+              <span class="text-lg">Morning Exercise</span>
+            </label>
+            <span
+              class="rounded-full bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1"
+            >
+              Daily
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card: Weekly -->
+      <article
+        class="rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,.06)] ring-1 ring-black/5 overflow-hidden"
+      >
+        <div
+          class="bg-gradient-to-r from-emerald-700 to-emerald-600 text-white px-6 py-3 font-extrabold text-lg rounded-t-3xl"
+        >
+          Weekly Tasks
+        </div>
+
+        <div class="p-6">
+          <div
+            class="flex items-center justify-between rounded-2xl border border-gray-100 px-4 py-3"
+          >
+            <label class="flex items-center gap-3 text-gray-800">
+              <input
+                type="checkbox"
+                class="h-5 w-5 rounded accent-emerald-600"
+              />
+              <span class="text-lg">Team Meeting</span>
+            </label>
+            <span
+              class="rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1"
+            >
+              Weekly
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card: Monthly -->
+      <article
+        class="rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,.06)] ring-1 ring-black/5 overflow-hidden"
+      >
+        <div
+          class="bg-gradient-to-r from-amber-500 to-amber-400 text-white px-6 py-3 font-extrabold text-lg rounded-t-3xl"
+        >
+          Monthly Tasks
+        </div>
+
+        <div class="p-6">
+          <div
+            class="flex items-center justify-between rounded-2xl border border-gray-100 px-4 py-3"
+          >
+            <label class="flex items-center gap-3 text-gray-800">
+              <input type="checkbox" class="h-5 w-5 rounded accent-amber-500" />
+              <span class="text-lg">Monthly Review</span>
+            </label>
+            <span
+              class="rounded-full bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1"
+            >
+              Monthly
+            </span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div
+  #modalCreateTask
+  class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm"
+>
+  <!-- Dialog -->
+  <div
+    class="w-[92%] max-w-2xl rounded-2xl bg-white shadow-2xl ring-1 ring-black/5 animate-[fadeIn_.2s_ease] overflow-hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="createTaskTitle"
+  >
+    <!-- Header -->
+    <div
+      class="relative bg-gradient-to-r from-purple-600 to-purple-500 text-white px-6 py-4"
+    >
+      <h2 id="createTaskTitle" class="text-xl md:text-2xl font-extrabold">
+        Create New Task
+      </h2>
+      <button
+        (click)="closeModal()"
+        type="button"
+        class="absolute right-3 top-3 grid h-9 w-9 place-content-center rounded-full hover:bg-white/15 transition"
+        aria-label="Close"
+      >
+        <!-- x icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="px-6 py-6">
+      <form class="space-y-5">
+        <!-- Task Title -->
+        <div>
+          <label class="mb-2 block text-sm font-semibold text-gray-800"
+            >Task Title</label
+          >
+          <input
+            name="taskName"
+            [(ngModel)]="taskPayload.taskName"
+            type="text"
+            placeholder="e.g. Morning Exercise"
+            required
+            class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+          />
+        </div>
+
+        <!-- Frequency -->
+        <div>
+          <label class="mb-2 block text-sm font-semibold text-gray-800"
+            >Frequency</label
+          >
+          <div class="relative">
+            <select
+              name="frequency"
+              [(ngModel)]="taskPayload.frequency"
+              class="w-full appearance-none rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            >
+              <option>Daily</option>
+              <option>Weekly</option>
+              <option>Monthly</option>
+            </select>
+            <!-- caret icon -->
+            <span
+              class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m6 9 6 6 6-6"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Start Date -->
+        <div>
+          <label class="mb-2 block text-sm font-semibold text-gray-800"
+            >Start Date</label
+          >
+          <div class="relative">
+            <input
+              name="startDate"
+              [(ngModel)]="taskPayload.startDate"
+              type="date"
+              class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            />
+          </div>
+        </div>
+
+        <!-- Due Date -->
+        <div>
+          <label class="mb-2 block text-sm font-semibold text-gray-800"
+            >Due Date</label
+          >
+          <div class="relative">
+            <input
+              name="dueDate"
+              [(ngModel)]="taskPayload.dueDate"
+              type="date"
+              class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            />
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mt-6">
+          <label class="block text-gray-800 font-semibold mb-2"
+            >Description</label
+          >
+          <input
+            name="description"
+            [(ngModel)]="taskPayload.description"
+            type="text"
+            class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+          />
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div
+      class="flex items-center justify-end gap-3 border-t border-gray-100 px-6 py-4"
+    >
+      <button
+        type="button"
+        class="rounded-xl bg-gray-600/90 text-white px-5 py-2.5 font-semibold shadow-sm hover:bg-gray-700 transition"
+      >
+        Cancel
+      </button>
+      <button
+        (click)="createTask()"
+        type="button"
+        class="rounded-xl bg-purple-600 text-white px-5 py-2.5 font-semibold shadow-sm hover:bg-purple-700 active:scale-[.98] transition"
+      >
+        Create Task
+      </button>
+    </div>
+  </div>
+</div>
